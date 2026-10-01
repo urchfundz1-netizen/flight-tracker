@@ -1,0 +1,31 @@
+{
+  "name": "flight-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "migrate": "node --env-file-if-exists=.env.local scripts/migrate.js",
+    "check-migrations": "node scripts/check-migrations.js",
+    "check-db": "node --env-file-if-exists=.env.local scripts/check-db.js",
+    "smoke": "node --env-file-if-exists=.env.local scripts/smoke.js",
+    "create-admin": "node --env-file-if-exists=.env.local scripts/create-admin.js",
+    "set-password": "node --env-file-if-exists=.env.local scripts/set-password.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "next": "16.3.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8"
+  },
+  "type": "module"
+}
