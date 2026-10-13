@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { AdminFooter, AdminHeader } from "@/components/AdminChrome";
 import FlightForm from "@/components/FlightForm";
 import requireAdminPage from "@/lib/require-admin-page";
-import { durationMinutes, getFlightById } from "@/lib/flights";
-import { formatDate, formatDuration } from "@/lib/format";
+import { durationMinutes, getFlightById, listFlightEvents } from "@/lib/flights";
+import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -20,6 +20,7 @@ export default async function EditFlightPage({ params }) {
   if (!flight) notFound();
 
   const minutes = durationMinutes(flight);
+  const events = await listFlightEvents(id);
 
   return (
     <>
@@ -47,6 +48,29 @@ export default async function EditFlightPage({ params }) {
           </div>
 
           <FlightForm mode="edit" flight={flight} />
+
+          <div className="card" style={{ marginTop: "1.4rem" }}>
+            <h2 style={{ fontSize: "1.05rem", margin: "0 0 0.9rem" }}>History</h2>
+            {events.length > 0 ? (
+              <ol className="history">
+                {events.map((event) => (
+                  <li className="history__item" key={event.id}>
+                    <span className={`history__dot history__dot--${event.event_type}`} />
+                    <div>
+                      <p style={{ margin: 0 }}>{event.description}</p>
+                      <span className="history__time muted small">
+                        {formatDateTime(event.created_at)}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="muted small" style={{ margin: 0 }}>
+                No events recorded yet.
+              </p>
+            )}
+          </div>
         </div>
       </main>
       <AdminFooter />
