@@ -20,7 +20,15 @@ export default function FlightTable({ flights }) {
     return flights.filter((flight) => {
       if (status && flight.status !== status) return false;
       if (!term) return true;
-      return [flight.code, flight.airline, flight.origin, flight.destination, flight.passenger_name]
+      return [
+        flight.code,
+        flight.airline,
+        flight.origin,
+        flight.origin_city,
+        flight.destination,
+        flight.destination_city,
+        flight.passenger_name,
+      ]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(term));
     });
@@ -152,6 +160,13 @@ export default function FlightTable({ flights }) {
                         {flight.origin} → {flight.destination}
                       </div>
                       <div className="small muted">{flight.airline}</div>
+                      {(flight.origin_city || flight.destination_city) && (
+                        <div className="small muted">
+                          {[flight.origin_city, flight.destination_city]
+                            .filter(Boolean)
+                            .join(" → ")}
+                        </div>
+                      )}
                     </td>
                     <td data-label="Boarding">
                       <div>{flight.boarding_date}</div>

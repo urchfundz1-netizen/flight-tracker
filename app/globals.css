@@ -792,6 +792,364 @@ a:hover {
   flex-wrap: wrap;
 }
 
+/* ---------- boarding pass ticket ---------- */
+
+.ticket {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+  color: #202a35;
+}
+
+.ticket__header {
+  display: flex;
+  align-items: stretch;
+  background: #08a9e5;
+  color: #fff;
+  min-height: 68px;
+}
+
+.ticket__header-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.5rem;
+}
+
+.ticket__globe {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.ticket__title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.ticket__header-stub {
+  width: 31%;
+  min-width: 245px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  border-left: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+.ticket__subtitle {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ticket__body {
+  display: flex;
+  background-color: #fff;
+  background-image:
+    radial-gradient(ellipse at 25% 35%, rgba(203, 213, 225, 0.18), transparent 40%),
+    radial-gradient(ellipse at 60% 65%, rgba(203, 213, 225, 0.2), transparent 45%);
+}
+
+.ticket__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.ticket__main-inner {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.ticket__vbarcode {
+  width: 32px;
+  height: 105px;
+  flex-shrink: 0;
+  align-self: center;
+  background: repeating-linear-gradient(
+    180deg,
+    #111 0px,
+    #111 2px,
+    transparent 2px,
+    transparent 4px,
+    #111 4px,
+    #111 5px,
+    transparent 5px,
+    transparent 8px
+  );
+}
+
+.ticket__details {
+  flex: 1;
+  min-width: 0;
+}
+
+.ticket__route {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ticket__label {
+  margin: 0 0 0.3rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ticket__airport {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.5vw, 3.25rem);
+  line-height: 0.95;
+  font-weight: 800;
+  color: #159fd5;
+  letter-spacing: -2px;
+}
+
+.ticket__city {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.ticket__when {
+  margin: 0.2rem 0 0;
+  font-size: 0.65rem;
+  color: #334155;
+}
+
+.ticket__route-mid {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ticket__route-line {
+  height: 2px;
+  flex: 1;
+  min-width: 12px;
+  background-image: linear-gradient(to right, #83c9e8 50%, transparent 50%);
+  background-size: 8px 2px;
+}
+
+.ticket__plane {
+  color: #129fe0;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.ticket__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.ticket__cell--wide {
+  grid-column: span 2;
+}
+
+.ticket__value {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #202a35;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.ticket__notice {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.ticket__stub {
+  width: 31%;
+  min-width: 245px;
+  border-left: 2px dashed #d7dee5;
+}
+
+.ticket__stub-inner {
+  padding: 1.25rem;
+}
+
+.ticket__stub-route {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ticket__stub-label {
+  margin: 0 0 0.2rem;
+  font-size: 0.5rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ticket__stub-code {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 800;
+  color: #159fd5;
+  letter-spacing: -1px;
+}
+
+.ticket__stub-city {
+  margin: 0.15rem 0 0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.ticket__stub-when {
+  margin: 0.1rem 0 0;
+  font-size: 0.5rem;
+  color: #475569;
+}
+
+.ticket__stub-plane {
+  justify-self: center;
+  color: #0ea5e9;
+  font-size: 1.4rem;
+}
+
+.ticket__stub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.ticket__stub-cell--wide {
+  grid-column: span 2;
+}
+
+.ticket__stub-value {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #26313b;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.ticket__barcode {
+  height: 48px;
+  width: 100%;
+  margin-top: 1.25rem;
+  background: repeating-linear-gradient(
+    90deg,
+    #111827 0px,
+    #111827 2px,
+    transparent 2px,
+    transparent 4px,
+    #111827 4px,
+    #111827 5px,
+    transparent 5px,
+    transparent 8px,
+    #111827 8px,
+    #111827 12px,
+    transparent 12px,
+    transparent 14px,
+    #111827 14px,
+    #111827 15px,
+    transparent 15px,
+    transparent 19px
+  );
+}
+
+@media (max-width: 760px) {
+  .ticket {
+    border-radius: 12px;
+  }
+
+  .ticket__header {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .ticket__header-main {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .ticket__header-stub {
+    width: 100%;
+    min-width: 0;
+    padding: 0.75rem 1.25rem;
+    border-left: none;
+    border-top: 2px dashed rgba(255, 255, 255, 0.3);
+  }
+
+  .ticket__body {
+    flex-direction: column;
+  }
+
+  .ticket__main-inner {
+    gap: 1rem;
+    padding: 1.1rem 1rem;
+  }
+
+  .ticket__vbarcode {
+    width: 22px;
+    height: 82px;
+  }
+
+  .ticket__airport {
+    font-size: 2.2rem;
+  }
+
+  .ticket__plane {
+    font-size: 2.2rem;
+  }
+
+  .ticket__stub-plane {
+    font-size: 1.1rem;
+  }
+
+  .ticket__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ticket__stub {
+    width: 100%;
+    min-width: 0;
+    border-left: none;
+    border-top: 2px dashed #d7dee5;
+  }
+
+  .ticket__barcode {
+    height: 38px;
+  }
+}
+
+@media print {
+  .ticket {
+    box-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

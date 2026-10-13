@@ -9,7 +9,9 @@ const EMPTY = {
   airline: "",
   flight_number: "",
   origin: "",
+  origin_city: "",
   destination: "",
+  destination_city: "",
   travel_class: "Economy",
   terminal: "",
   gate: "",
@@ -151,6 +153,17 @@ export default function FlightForm({ flight, mode = "create" }) {
           />
 
           <Field
+            label="From city"
+            name="origin_city"
+            value={values.origin_city ?? ""}
+            error={errors.origin_city}
+            onChange={setField}
+            placeholder="City name"
+            maxLength={80}
+            hint="Optional. Shown under the code on the boarding pass."
+          />
+
+          <Field
             label="To"
             name="destination"
             value={values.destination}
@@ -159,6 +172,17 @@ export default function FlightForm({ flight, mode = "create" }) {
             placeholder="BBB"
             maxLength={8}
             required
+          />
+
+          <Field
+            label="To city"
+            name="destination_city"
+            value={values.destination_city ?? ""}
+            error={errors.destination_city}
+            onChange={setField}
+            placeholder="City name"
+            maxLength={80}
+            hint="Optional. Shown under the code on the boarding pass."
           />
 
           <div className="fieldset-title">Boarding &amp; schedule</div>

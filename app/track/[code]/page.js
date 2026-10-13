@@ -19,7 +19,7 @@ export default async function TrackPage({ params }) {
     <>
       <SiteHeader />
       <main className="page">
-        <div className="container" style={{ maxWidth: 780 }}>
+        <div className="container" style={{ maxWidth: 1050 }}>
           <FlightDetails flight={{ ...flight, duration_minutes: durationMinutes(flight) }} />
         </div>
       </main>

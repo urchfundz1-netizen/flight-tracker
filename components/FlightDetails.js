@@ -4,110 +4,174 @@ import { durationMinutes } from "@/lib/flights";
 import StatusBadge from "./StatusBadge";
 
 /**
- * Read-only flight card shown to passengers after they enter a tracking code.
+ * Read-only boarding-pass style ticket shown to passengers after they enter a
+ * tracking code.
  */
 export default function FlightDetails({ flight, backHref = "/" }) {
   const minutes = flight.duration_minutes ?? durationMinutes(flight);
   const cancelled = flight.status === "cancelled";
+  const airline = flight.airline;
 
   return (
     <div className="stack">
-      <div className="card card--pad-lg stack">
-        <div className="row" style={{ justifyContent: "space-between" }}>
-          <div>
-            <div className="detail__label">Tracking code</div>
-            <div className="detail__value detail__value--lg mono">{flight.code}</div>
+      <div className="ticket">
+        <header className="ticket__header">
+          <div className="ticket__header-main">
+            <span className="ticket__globe" aria-hidden="true">
+              ✈
+            </span>
+            <h1 className="ticket__title">AIRLINE TICKET</h1>
           </div>
-          <StatusBadge status={flight.status} />
-        </div>
+          <div className="ticket__header-stub">
+            <h2 className="ticket__subtitle">BOARDING PASS</h2>
+          </div>
+        </header>
 
-        {cancelled && (
-          <p className="alert alert--error" style={{ margin: 0 }}>
-            This flight has been cancelled. Contact your airline for rebooking options.
-          </p>
-        )}
+        <div className="ticket__body">
+          <section className="ticket__main">
+            <div className="ticket__main-inner">
+              <div className="ticket__vbarcode" aria-hidden="true" />
 
-        <div className="route">
-          <div className="route__end">
-            <div className="route__code">{flight.origin}</div>
-            <div className="small muted">From</div>
-          </div>
-          <div className="route__line">
-            <span>{formatDuration(minutes)}</span>
-            <span aria-hidden="true">─────✈─────</span>
-            <span>{flight.flight_number ?? "Flight"}</span>
-          </div>
-          <div className="route__end">
-            <div className="route__code">{flight.destination}</div>
-            <div className="small muted">To</div>
-          </div>
-        </div>
+              <div className="ticket__details">
+                <div className="ticket__route">
+                  <div>
+                    <p className="ticket__label">From:</p>
+                    <h2 className="ticket__airport">{flight.origin}</h2>
+                    <p className="ticket__city">{flight.origin_city || flight.origin}</p>
+                    <p className="ticket__when">{formatDate(flight.boarding_date)}</p>
+                    <p className="ticket__when">{formatTime(flight.departure_time)}</p>
+                  </div>
 
-        <div className="detail-grid">
-          <div className="detail">
-            <div className="detail__label">Airline</div>
-            <div className="detail__value">{flight.airline}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Travel class</div>
-            <div className="detail__value">{flight.travel_class}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Flight duration</div>
-            <div className="detail__value">{formatDuration(minutes)}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Terminal</div>
-            <div className="detail__value">{flight.terminal || "—"}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Gate</div>
-            <div className="detail__value">{flight.gate || "—"}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Seat</div>
-            <div className="detail__value">{flight.seat || "—"}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Passenger</div>
-            <div className="detail__value">{flight.passenger_name || "—"}</div>
-          </div>
-          <div className="detail">
-            <div className="detail__label">Boarding date</div>
-            <div className="detail__value">{formatDate(flight.boarding_date)}</div>
-          </div>
-        </div>
-      </div>
+                  <div className="ticket__route-mid">
+                    <span className="ticket__route-line" />
+                    <span className="ticket__plane" aria-hidden="true">
+                      ✈
+                    </span>
+                    <span className="ticket__route-line" />
+                  </div>
 
-      <div className="card card--pad-lg">
-        <h2>Schedule</h2>
-        <div className="timeline">
-          <div className="timeline__row">
-            <div className="timeline__time">{formatTime(flight.boarding_time)}</div>
-            <div className="timeline__body">
-              <div className="timeline__title">Boarding begins</div>
-              <div className="timeline__meta">
-                Terminal {flight.terminal || "TBC"} · Gate {flight.gate || "TBC"} ·{" "}
-                {formatDate(flight.boarding_date)}
+                  <div>
+                    <p className="ticket__label">To:</p>
+                    <h2 className="ticket__airport">{flight.destination}</h2>
+                    <p className="ticket__city">{flight.destination_city || flight.destination}</p>
+                    <p className="ticket__when">{formatDate(flight.arrival_date)}</p>
+                    <p className="ticket__when">{formatTime(flight.arrival_time)}</p>
+                  </div>
+                </div>
+
+                <div className="ticket__grid">
+                  <div className="ticket__cell ticket__cell--wide">
+                    <p className="ticket__label">Passenger Name</p>
+                    <p className="ticket__value">{flight.passenger_name || "—"}</p>
+                  </div>
+                  <div className="ticket__cell">
+                    <p className="ticket__label">Flight:</p>
+                    <p className="ticket__value">{flight.flight_number || "—"}</p>
+                  </div>
+                  <div className="ticket__cell">
+                    <p className="ticket__label">Seat:</p>
+                    <p className="ticket__value">{flight.seat || "—"}</p>
+                  </div>
+                  <div className="ticket__cell">
+                    <p className="ticket__label">Airline:</p>
+                    <p className="ticket__value">{airline}</p>
+                  </div>
+                  <div className="ticket__cell">
+                    <p className="ticket__label">Gate:</p>
+                    <p className="ticket__value">{flight.gate || "—"}</p>
+                  </div>
+                  <div className="ticket__cell">
+                    <p className="ticket__label">Terminal:</p>
+                    <p className="ticket__value">{flight.terminal || "—"}</p>
+                  </div>
+                  <div className="ticket__cell">
+                    <p className="ticket__label">Class:</p>
+                    <p className="ticket__value">{flight.travel_class}</p>
+                  </div>
+                </div>
+
+                <p className="ticket__notice">
+                  GATE CLOSES 20 MINUTES BEFORE DEPARTURE
+                </p>
               </div>
             </div>
-          </div>
-          <div className="timeline__row">
-            <div className="timeline__time">{formatTime(flight.departure_time)}</div>
-            <div className="timeline__body">
-              <div className="timeline__title">Departure from {flight.origin}</div>
-              <div className="timeline__meta">{flight.airline}</div>
+          </section>
+
+          <aside className="ticket__stub">
+            <div className="ticket__stub-inner">
+              <div className="ticket__stub-route">
+                <div>
+                  <p className="ticket__stub-label">From:</p>
+                  <h3 className="ticket__stub-code">{flight.origin}</h3>
+                  <p className="ticket__stub-city">{flight.origin_city || flight.origin}</p>
+                  <p className="ticket__stub-when">{formatDate(flight.boarding_date)}</p>
+                  <p className="ticket__stub-when">{formatTime(flight.departure_time)}</p>
+                </div>
+
+                <span className="ticket__stub-plane" aria-hidden="true">
+                  ✈
+                </span>
+
+                <div>
+                  <p className="ticket__stub-label">To:</p>
+                  <h3 className="ticket__stub-code">{flight.destination}</h3>
+                  <p className="ticket__stub-city">{flight.destination_city || flight.destination}</p>
+                  <p className="ticket__stub-when">{formatDate(flight.arrival_date)}</p>
+                  <p className="ticket__stub-when">{formatTime(flight.arrival_time)}</p>
+                </div>
+              </div>
+
+              <div className="ticket__stub-grid">
+                <div className="ticket__stub-cell ticket__stub-cell--wide">
+                  <p className="ticket__stub-label">Passenger Name</p>
+                  <p className="ticket__stub-value">{flight.passenger_name || "—"}</p>
+                </div>
+                <div className="ticket__stub-cell">
+                  <p className="ticket__stub-label">Flight:</p>
+                  <p className="ticket__stub-value">{flight.flight_number || "—"}</p>
+                </div>
+                <div className="ticket__stub-cell">
+                  <p className="ticket__stub-label">Seat:</p>
+                  <p className="ticket__stub-value">{flight.seat || "—"}</p>
+                </div>
+                <div className="ticket__stub-cell">
+                  <p className="ticket__stub-label">Gate:</p>
+                  <p className="ticket__stub-value">{flight.gate || "—"}</p>
+                </div>
+                <div className="ticket__stub-cell">
+                  <p className="ticket__stub-label">Terminal:</p>
+                  <p className="ticket__stub-value">{flight.terminal || "—"}</p>
+                </div>
+                <div className="ticket__stub-cell">
+                  <p className="ticket__stub-label">Class:</p>
+                  <p className="ticket__stub-value">{flight.travel_class}</p>
+                </div>
+              </div>
+
+              <div className="ticket__barcode" aria-hidden="true" />
             </div>
-          </div>
-          <div className="timeline__row">
-            <div className="timeline__time">{formatTime(flight.arrival_time)}</div>
-            <div className="timeline__body">
-              <div className="timeline__title">Arrival at {flight.destination}</div>
-              <div className="timeline__meta">{formatDate(flight.arrival_date)}</div>
-            </div>
-          </div>
+          </aside>
         </div>
       </div>
+
+      <div className="row" style={{ justifyContent: "space-between" }}>
+        <div>
+          <div className="detail__label">Tracking code</div>
+          <div className="detail__value detail__value--lg mono">{flight.code}</div>
+        </div>
+        <StatusBadge status={flight.status} />
+      </div>
+
+      {cancelled && (
+        <p className="alert alert--error" style={{ margin: 0 }}>
+          This flight has been cancelled. Contact your airline for rebooking options.
+        </p>
+      )}
+
+      <p className="muted small" style={{ margin: 0 }}>
+        Flight duration {formatDuration(minutes)} · Departure{" "}
+        {formatTime(flight.departure_time)} · Arrival {formatTime(flight.arrival_time)}
+      </p>
 
       {flight.note && (
         <div className="alert alert--info">Note from the airline: {flight.note}</div>
