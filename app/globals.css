@@ -351,6 +351,58 @@ a:hover {
   color: #cfe0ff;
 }
 
+/* ---------- emergency notice ---------- */
+
+.emergency-notice {
+  position: relative;
+  border: 1px solid rgba(224, 82, 99, 0.4);
+  border-left: 4px solid var(--danger);
+  background: linear-gradient(180deg, rgba(224, 82, 99, 0.16), rgba(224, 82, 99, 0.06));
+  color: #ffe3e6;
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem 1.2rem;
+  box-shadow: 0 12px 30px rgba(224, 82, 99, 0.14);
+}
+
+.emergency-notice__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffc2c9;
+}
+
+.emergency-notice__title::before {
+  content: "⚠";
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.emergency-notice__body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #ffe3e6;
+}
+
+.emergency-notice__para {
+  margin: 0 0 0.8rem;
+}
+
+.emergency-notice__signature {
+  margin: 1rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffd7db;
+}
+
 /* ---------- badges ---------- */
 
 .badge {
@@ -385,6 +437,11 @@ a:hover {
 .badge--cancelled {
   background: var(--danger-soft);
   color: #ffb3bb;
+}
+.badge--emergency {
+  background: var(--danger);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(224, 82, 99, 0.25);
 }
 
 /* ---------- tables ---------- */

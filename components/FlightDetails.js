@@ -1,19 +1,32 @@
 import Link from "next/link";
 import { formatDate, formatDuration, formatTime } from "@/lib/format";
 import { durationMinutes } from "@/lib/flights";
+import EmergencyNotice from "./EmergencyNotice";
 import StatusBadge from "./StatusBadge";
 
 /**
  * Read-only boarding-pass style ticket shown to passengers after they enter a
  * tracking code.
  */
-export default function FlightDetails({ flight, backHref = "/" }) {
+export default function FlightDetails({ flight, liveHref }) {
   const minutes = flight.duration_minutes ?? durationMinutes(flight);
   const cancelled = flight.status === "cancelled";
   const airline = flight.airline;
 
   return (
     <div className="stack">
+      {flight.status === "emergency" && (
+        <div className="emergency-notice" role="alert">
+          <EmergencyNotice
+            flight={flight}
+            titleClassName="emergency-notice__title"
+            bodyClassName="emergency-notice__body"
+            paraClassName="emergency-notice__para"
+            signatureClassName="emergency-notice__signature"
+          />
+        </div>
+      )}
+
       <div className="ticket">
         <header className="ticket__header">
           <div className="ticket__header-main">
@@ -178,9 +191,11 @@ export default function FlightDetails({ flight, backHref = "/" }) {
       )}
 
       <div className="row">
-        <Link href={backHref} className="btn btn--ghost btn--sm">
-          Track another flight
-        </Link>
+        {liveHref && (
+          <Link href={liveHref} className="btn">
+            See flight
+          </Link>
+        )}
       </div>
     </div>
   );

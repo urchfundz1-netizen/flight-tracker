@@ -24,6 +24,7 @@ const EMPTY = {
   arrival_time: "",
   status: "scheduled",
   note: "",
+  emergency_airport: "",
 };
 
 export default function FlightForm({ flight, mode = "create" }) {
@@ -277,8 +278,22 @@ export default function FlightForm({ flight, mode = "create" }) {
               ["delayed", "Delayed"],
               ["landed", "Landed"],
               ["cancelled", "Cancelled"],
+              ["emergency", "Emergency landing"],
             ]}
           />
+
+          {values.status === "emergency" && (
+            <Field
+              label="Emergency landing airport"
+              name="emergency_airport"
+              value={values.emergency_airport ?? ""}
+              error={errors.emergency_airport}
+              onChange={setField}
+              placeholder="e.g. Chicago O'Hare"
+              maxLength={120}
+              hint="Named in the NOTICE on the customer's ticket. Defaults to the destination if blank."
+            />
+          )}
 
           <div className="field form-grid__full">
             <label className="label" htmlFor="note">

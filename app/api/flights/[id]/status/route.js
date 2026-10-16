@@ -3,8 +3,9 @@ import { badRequest, withAdmin } from "@/lib/api-guard";
 import { getFlightById, setFlightStatus } from "@/lib/flights";
 
 /**
- * Cancels or reinstates a flight.
+ * Cancels or reinstates a flight, or pins any manual status.
  * POST { status: "cancelled" } or { status: "scheduled" } to restore it.
+ * An emergency landing may also carry { emergency_airport } for its NOTICE.
  */
 export async function POST(request, { params }) {
   return withAdmin(request, async () => {
@@ -19,9 +20,11 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: "Invalid request." }, { status: 400 });
     }
 
-    const result = await setFlightStatus(id, body.status);
+    const result = await setFlightStatus(id, body.status, {
+      emergency_airport: body.emergency_airport,
+    });
     if (!result.ok) return badRequest(result.errors);
 
-    return NextResponse.json({ ok: true, status: body.status });
+    return NextResponse.json({ ok: true, status: result.status ?? body.status });
   });
 }

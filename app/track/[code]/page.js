@@ -1,12 +1,12 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
-import FlightDetails from "@/components/FlightDetails";
-import { durationMinutes, findFlightByCode } from "@/lib/flights";
+import LiveFlight from "@/components/LiveFlight";
+import { durationMinutes, findFlightByCode, flightProgress } from "@/lib/flights";
 
 export async function generateMetadata({ params }) {
   const { code } = await params;
-  return { title: `Flight ${String(code).toUpperCase()}` };
+  const flight = await findFlightByCode(code);
+  const label = flight?.flight_number || String(code).toUpperCase();
+  return { title: `Flight ${label}` };
 }
 
 export default async function TrackPage({ params }) {
@@ -15,15 +15,13 @@ export default async function TrackPage({ params }) {
 
   if (!flight) notFound();
 
+  const encoded = encodeURIComponent(flight.code);
+
   return (
-    <>
-      <SiteHeader />
-      <main className="page">
-        <div className="container" style={{ maxWidth: 1050 }}>
-          <FlightDetails flight={{ ...flight, duration_minutes: durationMinutes(flight) }} />
-        </div>
-      </main>
-      <SiteFooter />
-    </>
+    <LiveFlight
+      flight={{ ...flight, duration_minutes: durationMinutes(flight) }}
+      progress={flightProgress(flight)}
+      ticketHref={`/track/${encoded}/ticket`}
+    />
   );
 }
