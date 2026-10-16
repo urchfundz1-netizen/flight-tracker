@@ -1,4 +1,4 @@
-/* Scoped styles for the Planefinder-style live flight view.
+﻿/* Scoped styles for the Planefinder-style live flight view.
    Class names are unique per component thanks to the CSS module, so the
    generic names from the original mock (card, route, stat...) do not clash
    with globals.css. */
@@ -172,7 +172,7 @@
   z-index: 7;
   left: 50%;
   transform: translateX(-50%);
-  top: calc(env(safe-area-inset-top, 0px) + var(--u) * 58);
+  top: calc(env(safe-area-inset-top, 0px) + var(--u) * 16);
   display: flex;
   align-items: center;
   gap: calc(var(--u) * 7);
@@ -208,7 +208,7 @@
 }
 @media (min-width: 481px) and (min-height: 521px) {
   .brand {
-    top: calc(var(--u) * 84);
+    top: calc(var(--u) * 24);
   }
 }
 
@@ -309,7 +309,7 @@
   border-bottom: 1px solid rgba(200, 49, 47, 0.22);
 }
 .noticeTitle::before {
-  content: "⚠";
+  content: "âš ";
   font-size: calc(var(--u) * 13);
   letter-spacing: 0;
 }
