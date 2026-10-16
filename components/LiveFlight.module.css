@@ -172,7 +172,7 @@
   z-index: 7;
   left: 50%;
   transform: translateX(-50%);
-  top: calc(env(safe-area-inset-top, 0px) + var(--u) * 16);
+  top: calc(env(safe-area-inset-top, 0px) + var(--u) * 58);
   display: flex;
   align-items: center;
   gap: calc(var(--u) * 7);
@@ -208,7 +208,7 @@
 }
 @media (min-width: 481px) and (min-height: 521px) {
   .brand {
-    top: calc(var(--u) * 42);
+    top: calc(var(--u) * 84);
   }
 }
 
@@ -285,7 +285,7 @@
   margin: 0 auto calc(var(--u) * 8);
 }
 .notice {
-  margin: calc(var(--u) * 60) 0 calc(var(--u) * 10);
+  margin: calc(var(--u) * 4) 0 calc(var(--u) * 10);
   padding: calc(var(--u) * 12);
   border-radius: calc(var(--u) * 16);
   background: linear-gradient(180deg, rgba(200, 49, 47, 0.14), rgba(200, 49, 47, 0.05));
