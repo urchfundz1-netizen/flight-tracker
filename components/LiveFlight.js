@@ -57,15 +57,15 @@ export default function LiveFlight({ flight, progress = 0, ticketHref }) {
               <i />
             </div>
 
-            <div className={styles.brand}>
-              <span className={styles.mark}>
-                <svg viewBox="0 0 24 24" fill="#fff">
-                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" />
-                </svg>
-              </span>
-              <b>Plane</b>
-              <span>Tracker</span>
-            </div>
+
+
+
+
+
+
+
+
+
 
             <div className={styles.trail} />
             <div
