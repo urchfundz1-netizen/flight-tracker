@@ -285,7 +285,7 @@
   margin: 0 auto calc(var(--u) * 8);
 }
 .notice {
-  margin: calc(var(--u) * 4) 0 calc(var(--u) * 10);
+  margin: calc(var(--u) * 60) 0 calc(var(--u) * 10);
   padding: calc(var(--u) * 12);
   border-radius: calc(var(--u) * 16);
   background: linear-gradient(180deg, rgba(200, 49, 47, 0.14), rgba(200, 49, 47, 0.05));
